@@ -1,16 +1,16 @@
 /*eslint-disable import/default */
 import React from 'react';
 import {shallow} from 'enzyme';
-import App from './App';
+import ChessKnight from './ChessKnight';
 
-let component = "App";
+let component = "ChessKnight";
 let fail = false;
 
 describe(component, () => {
     let wrapper;
 
     beforeEach(()=>{
-      wrapper = shallow(<App />);
+      wrapper = shallow(<ChessKnight />);
     });
 
     test(`shallow mounted`, () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import ChessKnight from './ChessKnight';
 
 export class App extends React.Component {
   constructor(props, context) {
@@ -18,6 +18,8 @@ export class App extends React.Component {
         <div className="jumbotron">
             <h1>Chess Knight - Shortest Path</h1>
         </div>
+
+        <ChessKnight />
 
       </div>
   );
