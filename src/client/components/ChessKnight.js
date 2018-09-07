@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import ChessKnightBoard from './ChessKnightBoard';
 
@@ -15,21 +14,12 @@ export class ChessKnight extends React.Component {
 
 
   getKnightPath(src, dest) {
-
-//debugger;
-
     return axios({
       method:'get',
       url:'/api/getKnightPath',
       params: {src, dest}
     })
     .then(res => {
-      //if (res.data.length > 0 && res.data[0].x == src.x && res.data[0].y == src.y) {
-      //  res.data.shift();
-      //}
-
-      //debugger;
-
       this.setState({knightPath: res.data});
     });
   }
@@ -51,7 +41,6 @@ export class ChessKnight extends React.Component {
     jsxArray = this.state.knightPath.map( o => {
       displayValue = JSON.stringify(o);
       i++;
-      //return i == 0 ? <div></div> : <div key={i}>{displayValue}</div>;
       return <div key={i}>{displayValue}</div>;
     });
 

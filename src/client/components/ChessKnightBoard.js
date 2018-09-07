@@ -48,33 +48,8 @@ export class ChessKnightBoard extends React.Component {
   }
 
   chessNotation(x, y) {
-    let notation = "";
-    switch (y) {
-      case 0:
-        notation = "a";
-        break;
-      case 1:
-        notation = "b";
-        break;
-      case 2:
-        notation = "c";
-        break;
-      case 3:
-        notation = "d";
-        break;
-      case 4:
-        notation = "e";
-        break;
-      case 5:
-        notation = "f";
-        break;
-      case 6:
-        notation = "g";
-        break;
-      case 7:
-        notation = "h";
-        break;
-    }
+    const s = "abcdefgh".split("");
+    let notation = s[y];
     notation = notation + (x+1);
     return notation;
   }

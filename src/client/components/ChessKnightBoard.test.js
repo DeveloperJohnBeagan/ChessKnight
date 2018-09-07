@@ -10,7 +10,13 @@ describe(component, () => {
     let wrapper;
 
     beforeEach(()=>{
-      wrapper = shallow(<ChessKnightBoard />);
+      //
+      const props = {
+        clickCell: jest.fn(),
+        resetComponent: jest.fn()
+      }
+      //
+      wrapper = shallow(<ChessKnightBoard {...props} />);
     });
 
     test(`shallow mounted`, () => {
