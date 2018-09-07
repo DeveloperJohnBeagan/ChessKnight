@@ -10,21 +10,37 @@ export class ChessKnight extends React.Component {
       knightPath: []
     }
     this.clickCell = this.clickCell.bind(this);
+    this.resetComponent = this.resetComponent.bind(this);
   } // constructor
 
 
-  getKnightPath() {
-    axios({
+  getKnightPath(src, dest) {
+
+//debugger;
+
+    return axios({
       method:'get',
-      url:'/api/getKnightPath'
+      url:'/api/getKnightPath',
+      params: {src, dest}
     })
     .then(res => {
+      //if (res.data.length > 0 && res.data[0].x == src.x && res.data[0].y == src.y) {
+      //  res.data.shift();
+      //}
+
+      //debugger;
+
       this.setState({knightPath: res.data});
     });
   }
 
-  clickCell() {
+  async clickCell(src, dest) {
+    await this.getKnightPath(src, dest);
+    return this.state.knightPath;
+  }
 
+  resetComponent() {
+    this.setState({knightPath: []});
   }
 
 
@@ -35,21 +51,21 @@ export class ChessKnight extends React.Component {
     jsxArray = this.state.knightPath.map( o => {
       displayValue = JSON.stringify(o);
       i++;
+      //return i == 0 ? <div></div> : <div key={i}>{displayValue}</div>;
       return <div key={i}>{displayValue}</div>;
     });
 
     return (
       <div >
-        <h3>Click 2 squares... start and end.</h3>
+        <h3>Click 2 squares -- start and end.</h3>
         <br />
 
-        <ChessKnightBoard />
+        <ChessKnightBoard
+          clickCell={this.clickCell}
+          resetComponent={this.resetComponent}
+        />
 
         <br />
-
-        <button className="btn btn-danger" style={{fontSize: "1.2rem", width: "8rem"}}>Reset</button>
-
-        <br /><br />
         <div>
             {jsxArray}
         </div>

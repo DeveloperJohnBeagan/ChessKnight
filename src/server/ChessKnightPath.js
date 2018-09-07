@@ -17,6 +17,10 @@ function isOnChessBoard(x, y) {
 }
 
 function determinePath(lastNode, visited) {
+  let v = [];
+  visited.forEach( o => {
+      v.push(o);
+  });
   let r = [];
   r.unshift({x: lastNode.px, y: lastNode.py});
   let px = lastNode.px;
@@ -25,15 +29,22 @@ function determinePath(lastNode, visited) {
       visited.forEach( o => {
           if (o.dist == dist && o.x == px && o.y == py) {
               r.unshift({x: o.px, y: o.py});
-              let px = o.px;
-              let py = o.py;
+              px = o.px;
+              py = o.py;
           }
       });
+  }
+  if(r.length > 0 && r[0].x == v[0].x && r[0].y == v[0].y) {
+    r.shift();
   }
   return r;
 }
 
 function getBestPath(src, dest) {
+
+  src = JSON.parse(src);
+  dest = JSON.parse(dest);
+
   const row = [ 2, 2, -2, -2, 1, 1, -1, -1 ];
   const col = [ -1, 1, 1, -1, 2, -2, 2, -2 ];
 
