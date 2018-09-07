@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import * as helper from './ChessKnightHelper';
+
+
 
 export class ChessKnightBoard extends React.Component {
   constructor(props, context) {
@@ -47,16 +50,9 @@ export class ChessKnightBoard extends React.Component {
     );
   }
 
-  chessNotation(x, y) {
-    const s = "abcdefgh".split("");
-    let notation = s[y];
-    notation = notation + (x+1);
-    return notation;
-  }
-
   makeCell(i, k) {
     this.toggleColor();
-    const divText = this.chessNotation(i,k);
+    const divText = helper.chessNotation(i,k);
     const dataid = k.toString() + i.toString();
     return (
       <div

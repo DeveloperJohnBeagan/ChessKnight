@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ChessKnightBoard from './ChessKnightBoard';
+import * as helper from './ChessKnightHelper';
 
 export class ChessKnight extends React.Component {
   constructor(props, context) {
@@ -33,16 +34,27 @@ export class ChessKnight extends React.Component {
     this.setState({knightPath: []});
   }
 
+  formatKnightPath() {
+    let i = 0;
+    let output = {};
+    this.state.knightPath.forEach( o => {
+      output[i] = helper.chessNotation(o.y, o.x);
+      i++;
+    });
+   let jsxArray = [];
+   for(let i in output) {
+    const s = `"${i}":"${output[i]}"`;
+    jsxArray.push(<div key={i}>{s}</div>);
+    }
+    return (
+      <div>
+        <div>{"{"}</div>
+        <div>{jsxArray}</div>
+        <div>{"}"}</div>
+      </div>)
+  }
 
   render() {
-    let jsxArray = [];
-    let displayValue = "";
-    let i = 0;
-    jsxArray = this.state.knightPath.map( o => {
-      displayValue = JSON.stringify(o);
-      i++;
-      return <div key={i}>{displayValue}</div>;
-    });
 
     return (
       <div >
@@ -55,10 +67,11 @@ export class ChessKnight extends React.Component {
         />
 
         <br />
+        { this.state.knightPath.length == 0 ? null :
         <div>
-            {jsxArray}
+            {this.formatKnightPath()}
         </div>
-
+        }
 
       </div>
   );
