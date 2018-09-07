@@ -105,7 +105,7 @@ export class ChessKnightBoard extends React.Component {
     const row = parseInt(evt.target.dataset.row);
     const col = parseInt(evt.target.dataset.col);
     const dataid = evt.target.dataset.col + evt.target.dataset.row;
-    alert(dataid);
+    //alert(dataid);
 
     const startEnd = this.startEnd;
     this.toggleStartEnd();
